@@ -1,61 +1,58 @@
-# 项目简介
+# Chat2Note
 
-`ChatGPT-to-Note` 是一个工具，可将与 `ChatGPT` 的对话转换为笔记，方便保存和回顾。
+`chat2note` is a tool that converts conversations with `ChatGPT` into notes, making it easier to save and review important discussions.
 
-# 安装
+## Installation
 
-## 前置要求
-- 操作系统：`Windows` 或 `MacOS`
-- 已安装 `Chrome` 浏览器
+### Prerequisites
+- Operating System: `Windows` or `MacOS`
+- `Chrome` browser installed
 - `Python 3.8+`
-- 能正常访问 `ChatGPT` 网站
+- Accessible `ChatGPT` website
 
-## 安装步骤
-1. 将项目克隆到本地：
+### Installation Steps
+
+1. Clone the project to your local machine:
    ```bash
    git clone https://github.com/CosmicResearchCenter/chat2note.git
    ```
 
-2. 进入项目目录并安装依赖：
+2. Navigate to the project directory and install the dependencies:
+
    ```bash
    pip install .
    ```
 
-# 使用指南
+   
 
-## 设置环境变量
+##  Usage Guide
 
-请根据操作系统设置以下环境变量：
+### Set Environment Variables
 
-### Windows
+Before running the tool, configure the following environment variables based on your operating system:
 
+#### Windows
 ```bash
-$env:BASE_URL="你的 OPENAI API 基础 URL"
-$env:API_KEY="你的 OPENAI API 密钥"
-$env:MODEL="模型名称"
+$env:BASE_URL="Your OPENAI API base URL"
+$env:API_KEY="Your OPENAI API key"
+$env:MODEL="Model name"
 ```
-
-### MacOS
-
+#### MacOS
 ```bash
-export BASE_URL="你的 OPENAI API 基础 URL"
-export API_KEY="你的 OPENAI API 密钥"
-export MODEL="模型名称"
+export BASE_URL="Your OPENAI API base URL"
+export API_KEY="Your OPENAI API key"
+export MODEL="Model name"
 ```
+### Running the Tool
 
-## 运行工具
-
-将 `ChatGPT` 对话的分享链接与以下命令一起使用：
-
+Use the share link of your ChatGPT conversation with the following command:
 ```bash
 chat2note -u https://chatgpt.com/share/xxxxx
 ```
+Success Message
 
-## 成功提示
-
-当工具成功运行时，会看到如下提示：
-
-```
+Once the tool runs successfully, you should see the following output:
+```bash
 -------------------------------------------------start-------------------------------------------------
 Retrieving user conversation history.
 Successfully retrieved user conversation history.
@@ -71,7 +68,8 @@ Note has been saved to xxxx.md file
 --------------------------------------------------end--------------------------------------------------
 ```
 
-# 后续计划
+## Future Plans
 
-- [ ] 支持更多模型
-- [ ] 支持通过爬虫抓取协议内容
+- [ ] 
+  Support for more models
+- [ ] Support for scraping content through a web crawler
