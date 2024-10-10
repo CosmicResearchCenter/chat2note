@@ -1,5 +1,5 @@
-from utils.get_logs import ChatLoger
-from utils.translate_to_note import chat_to_note
+from api.core.chat_log.get_logs import ChatLoger
+from api.core.chat_log.translate_to_note import chat_to_note
 import argparse
 import os
 import shutil
