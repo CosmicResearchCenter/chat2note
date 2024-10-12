@@ -1,5 +1,5 @@
-from core.chat_log.get_logs import ChatLoger
-from core.chat_log.translate_to_note import ChatToNote
+from core.chat2note.get_logs import ChatLoger
+from api.core.chat2note.chat2note import ChatToNote
 
 
 url = "https://chatgpt.com/share/67014432-b0b0-8009-8ab1-4bb026108c1e"
