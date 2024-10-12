@@ -1,7 +1,7 @@
 from enum import Enum
 from .doubao import DouBaoLLM
 from .openaillm import OpenAILLM
-from .zhipuai_llm import ZhipuAILLM
+from .zhipuai_llm import ZhiPuAI_LLM
 from .sparkai_llm import SparkAILLM
 from .llm import LLM
 
@@ -29,7 +29,7 @@ class LLM_Manager:
         elif lLM_Provider == LLM_Provider.OPENAI:
             return OpenAILLM()
         elif lLM_Provider == LLM_Provider.ZHIPUAI:
-            return ZhipuAILLM()
+            return ZhiPuAI_LLM()
         elif lLM_Provider == LLM_Provider.SPARKAI:
             return SparkAILLM()
         else:

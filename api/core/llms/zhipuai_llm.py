@@ -7,7 +7,7 @@ import sys
 from configs.llm_config import llm_Settings
 from .llm import LLM
 
-class ZhipuAILLM(LLM):
+class ZhiPuAI_LLM(LLM):
     def __init__(self, api_key: str=llm_Settings.ZHIPUAI_API_KEY,model:str=llm_Settings.ZHIPUAI_MODEL) -> None:
         self.client = ZhipuAI(api_key=api_key) # 填写您自己的APIKey
         self.messages: List[Iterable[dict]] = []
@@ -46,7 +46,7 @@ class ZhipuAILLM(LLM):
 if __name__ == "__main__":
    
     # print(LLM_Settings)
-    openai1 = ZhipuAILLM()
+    openai1 = ZhiPuAI_LLM()
     openai1.setPrompt("你是一个聊天助手")
     # print(openai1.ChatToBot("秦始皇是谁"))
     rs = openai1.ChatToBotWithSteam("秦始皇是谁")
