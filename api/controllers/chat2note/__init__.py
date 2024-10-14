@@ -1,9 +1,27 @@
 from fastapi import APIRouter
-from core.chat2note.chat_type import ChatLog
-from api.core.chat2note.chat2note import ChatToNote
-
+from starlette.responses import StreamingResponse
+import time
+from .models import ChatLogRequest,ChatLogResponse
+from core.chat2note.chat2note import ChatToNote
+from services.chat2note import Chat2NoteService
 router = APIRouter()
 
 @router.post("/chat2note")
-async def chat2note(chat:ChatLog):
-    return {"note":"HelloWorld"}
+async def chat2note(chat:ChatLogRequest):
+    if chat.url == "":
+        return ChatLogResponse(code="400",message="url is required",data=[])
+    
+    if chat.steaming:
+        return StreamingResponse(Chat2NoteService("OPENAI").chat_to_note(chat.url,steaming=True), media_type="text/event-stream")
+    else:
+        return ChatLogResponse(code="200",message="success",data=[Chat2NoteService("OPENAI").chat_to_note(chat.url)])
+    
+@router.post("/test")
+async def test(chat:ChatLogRequest):
+    if chat.url == "":
+        return ChatLogResponse(code="400",message="url is required",data=[])
+    
+    if chat.steaming:
+        return StreamingResponse(Chat2NoteService("OPENAI").chat_to_note_test(chat.url,steaming=True), media_type="text/event-stream")
+    else:
+        return ChatLogResponse(code="200",message="success",data=[Chat2NoteService("OPENAI").chat_to_note_test(chat.url)])
