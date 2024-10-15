@@ -95,14 +95,14 @@ content:
     def chat_to_note(self,log_text,steaming:bool=False):
         # 解析聊天记录
         log_texts = """
-请根据以下聊天对话内容，总结出一份简洁的笔记。并以Markdown格式输出。
+在输出纯markdown格式文本的前提下,请根据以下聊天对话内容，总结出一份简洁的笔记。
 聊天记录格式如下：
 ##############
 role: {log.role}
 content:
 {log.content}
 ##############
-请直接输出Markdown格式的笔记，不要包含其他内容。
+注意请直接输出markdown原始文本，如“###xxx\nxxxx####11131\n”，不需要以"```markdown"开头，也不要以"```"结尾，不要包含其他内容。
 以下是聊天记录：
 
 """
