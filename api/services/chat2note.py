@@ -20,8 +20,10 @@ class Chat2NoteService:
         else:
             res = self.chatToNote.chat_to_note(log_text,steaming)
             for i in res:
-                print(f"{{'data':'{i}'}}")
-                yield f"{{'data':'{i}'}}"
+                # i = i.replace('\n', '\\n')
+                print(i)
+                if i:
+                    yield i
     def chat_to_note_test(self,text,steaming:bool=False):
         if not steaming:
             res = self.chatToNote.chat_to_note(text,steaming)
@@ -29,6 +31,7 @@ class Chat2NoteService:
             res = self.chatToNote.chat_to_note(text,steaming)
             for i in res:
                 print(i)
+                # i = i.replace('\n', '\\n')
                 yield f"data:{i}"
         # for i in res:
         #     print(i)
