@@ -51,7 +51,7 @@
             <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;"type="primary">获取</el-button>
           </div>
           <div class="exportBox">
-            <el-button v-if="!isLoading" @click="exportMarkdown" style="width: 100px; height: 50px;">导出</el-button>
+            <el-button  @click="exportMarkdown" style="width: 100px; height: 50px;">导出</el-button>
           </div>
         </div>
 
@@ -232,6 +232,7 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -10;
   width: 100%;
   height: 100%;
 }
