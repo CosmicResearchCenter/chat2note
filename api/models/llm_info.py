@@ -10,3 +10,23 @@ class Api_Keys(Base):
     config = Column(JSON)
     created_at = Column(TIMESTAMP)
     updated_at = Column(TIMESTAMP) 
+
+class Note(Base):
+    __tablename__ = "notes"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer)
+    title = Column(String(255))
+    content = Column(Text)
+    created_at = Column(TIMESTAMP)
+    updated_at = Column(TIMESTAMP)
+
+class NoteList(Base):
+    __tablename__ = "note_lists"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer)
+    title = Column(String(255))
+    url = Column(String(255))
+    created_at = Column(TIMESTAMP)
+    updated_at = Column(TIMESTAMP)

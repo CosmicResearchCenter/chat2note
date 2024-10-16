@@ -11,7 +11,7 @@ class OpenAI_Config(MysqlClient):
     def __del__(self):
         super().__del__()
     def getinfo(self):
-        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "openai").first()
+        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "OPENAI").first()
         if info:
             self.API_KEY = info.api_key
             self.BASE_URL = info.config['BASE_URL']
@@ -28,7 +28,7 @@ class ZhiPuAI_Config(MysqlClient):
         super().__init__()
         self.getinfo()
     def getinfo(self):
-        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "zhipuai").first()
+        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "ZHIPUAI").first()
         if info:
             self.API_KEY = info.api_key
             self.MODEL = info.config['MODEL']
@@ -48,7 +48,7 @@ class SparkAI_Config(MysqlClient):
     def __del__(self):
         super().__del__()
     def getinfo(self):
-        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "sparkai").first()
+        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "SPARKAI").first()
         if info:
             self.API_KEY = info.api_key
             self.APP_ID = info.config['APP_ID']
@@ -69,7 +69,7 @@ class DouBaoAI_Config(MysqlClient):
     def __del__(self):
         super().__del__()
     def getinfo(self):
-        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "doubaoai").first()
+        info = self.db.query(Api_Keys).filter(Api_Keys.provider == "DOUBAO").first()
         if info:
             self.API_KEY = info.api_key
             self.BASE_URL = info.config['BASE_URL']
