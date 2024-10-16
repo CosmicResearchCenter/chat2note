@@ -26,7 +26,7 @@
             />
           </el-select>
           <el-input v-model="url" class="inputBox" placeholder="Please input URL" />
-          <el-button class="inputButton" @click="fetchStreamResponse">获取</el-button>
+          <el-button class="inputButton" @click="fetchStreamResponse" type="primary">获取</el-button>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
           </el-select>
           <div class="chatUrlBoxMini">
             <el-input v-model="url" style="width: 440px;height: 50px;" placeholder="Please input" />
-            <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;">获取</el-button>
+            <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;"type="primary">获取</el-button>
           </div>
           <div class="exportBox">
             <el-button v-if="!isLoading" @click="exportMarkdown" style="width: 100px; height: 50px;">导出</el-button>
@@ -58,10 +58,14 @@
       </div>
     </div>
   </div>
+  <el-drawer v-model="isShowSetProviderBox" title="I am the title" :with-header="false">
+    <ProviderSettingBox class="providerSettingBox" ></ProviderSettingBox>
+  </el-drawer>
+  
 </template>
 <script lang="ts" setup>
 import { ref, onMounted, nextTick } from 'vue';
-
+import ProviderSettingBox from '../components/ProviderSettingBox.vue';
 
 //用于设置是否显示markdown编辑器
 const showMarkdown = ref(false);
@@ -214,7 +218,15 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
 }
-
+.menuBoxDefault{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .hidenMarkdownBox {
   display: flex;
   flex-direction: column;
@@ -266,4 +278,5 @@ onMounted(() => {
   height: 60px;
   font-size: xx-large;
 }
+
 </style>
