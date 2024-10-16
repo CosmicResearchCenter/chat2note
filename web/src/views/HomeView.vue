@@ -3,22 +3,26 @@
     <div v-if="isLoading" class="loadingBox">
       <el-skeleton :rows="10" animated />
     </div>
-    <div v-else class="paid" >
-      <div class="chatUrlBox" v-if="!showMarkdown">
-        <el-input v-model="url" class="inputBox" style="width: 440px" placeholder="Please input" />
-        <el-button class="inputButton" @click="fetchStreamResponse">获取</el-button>
+    <div v-else class="paid">
+      <div class="hidenMarkdownBox" v-if="!showMarkdown">
+        <h1 style="font-size: 100px;">Chat2Note</h1>
+        <div class="chatUrlBox">
+          <el-input v-model="url" class="inputBox" placeholder="Please input" />
+          <el-button class="inputButton" @click="fetchStreamResponse">获取</el-button>
+        </div>
       </div>
+
       <div class="markdownBox" v-else>
         <div class="menuBox">
           <div class="chatUrlBoxMini">
-          <el-input  v-model="url" style="width: 440px;height: 50px;" placeholder="Please input" />
-          <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;">获取</el-button>
+            <el-input v-model="url" style="width: 440px;height: 50px;" placeholder="Please input" />
+            <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;">获取</el-button>
+          </div>
+          <div class="exportBox">
+            <el-button v-if="!isLoading" @click="exportMarkdown" style="width: 100px; height: 50px;">导出</el-button>
+          </div>
         </div>
-        <div class="exportBox">
-          <el-button v-if="!isLoading" @click="exportMarkdown" style="width: 100px; height: 50px;">导出</el-button>
-        </div>
-        </div>
-        
+
         <v-md-editor v-model="responseText" height="100vh"></v-md-editor>
       </div>
     </div>
@@ -39,18 +43,18 @@ const url = ref("")
 const responseText = ref('');
 // 导出为 .md 文件的函数
 const exportMarkdown = () => {
-      const blob = new Blob([responseText.value], { type: "text/markdown" });
-      const url = URL.createObjectURL(blob);
+  const blob = new Blob([responseText.value], { type: "text/markdown" });
+  const url = URL.createObjectURL(blob);
 
-      // 创建一个隐藏的 <a> 元素并触发下载
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "note.md";  // 设置下载文件名
-      a.click();
+  // 创建一个隐藏的 <a> 元素并触发下载
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "note.md";  // 设置下载文件名
+  a.click();
 
-      // 释放 URL 对象
-      URL.revokeObjectURL(url);
-    };
+  // 释放 URL 对象
+  URL.revokeObjectURL(url);
+};
 // 流式请求函数
 const fetchStreamResponse = async () => {
   // 点击后显示加载中的提示
@@ -73,7 +77,7 @@ const fetchStreamResponse = async () => {
     });
 
     if (response.body) {
-      
+
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
       let done = false;
@@ -118,32 +122,45 @@ onMounted(() => {
   /* width: 100vh; */
   /* 让父容器充满整个视窗高度 */
 }
-.loadingBox{
-  width: 60%; 
-  display: flex; 
+
+.loadingBox {
+  width: 60%;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.paid{
-  padding-top: 100px;
-  width: 100%; 
-  display: flex; 
+
+.paid {
+
+  width: 100%;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.menuBox{
+
+.hidenMarkdownBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -300px;
+}
+
+.menuBox {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-bottom: 10px
 }
-.chatUrlBoxMini{
+
+.chatUrlBoxMini {
   display: flex;
   align-self: center;
   justify-self: center;
 }
+
 .chatUrlBox {
   display: flex;
   gap: 10px;
@@ -151,14 +168,16 @@ onMounted(() => {
   align-items: center;
   flex-direction: row;
 }
-.markdownBox{
-  
+
+.markdownBox {
+  padding-top: 100px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .inputBox {
   width: 1040px;
   height: 60px;
