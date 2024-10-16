@@ -19,7 +19,7 @@
  ```
 进入后端根目录
 ```bash
-	cd chat2note/api
+cd chat2note/api
 ```
 #### 配置`.env` 
 ```bash
