@@ -13,10 +13,6 @@ import router from './router'
 
 // 引入markdown解析插件
 // 创建一个声明文件来避免TypeScript编译错误
-declare module '@kangc/v-md-editor' {
-    const content: any;
-    export default content;
-};
 
 // import VMdEditor from '@kangc/v-md-editor';
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
