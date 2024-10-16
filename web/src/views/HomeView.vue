@@ -25,8 +25,9 @@
               :value="item"
             />
           </el-select>
-          <el-input v-model="url" class="inputBox" placeholder="Please input URL" />
+          <el-input v-model="url" class="inputBox" placeholder="Please input URL" @keyup.enter="fetchStreamResponse" />
           <el-button class="inputButton" @click="fetchStreamResponse" type="primary">获取</el-button>
+          
         </div>
       </div>
 
@@ -46,7 +47,7 @@
             />
           </el-select>
           <div class="chatUrlBoxMini">
-            <el-input v-model="url" style="width: 440px;height: 50px;" placeholder="Please input" />
+            <el-input v-model="url" style="width: 440px;height: 50px;"@keyup.enter="fetchStreamResponse" placeholder="Please input" />
             <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;"type="primary">获取</el-button>
           </div>
           <div class="exportBox">
@@ -58,9 +59,12 @@
       </div>
     </div>
   </div>
-  <el-drawer v-model="isShowSetProviderBox" title="I am the title" :with-header="false">
+  <el-dialog v-model="isShowSetProviderBox" title="设置提供商" width="800">
     <ProviderSettingBox class="providerSettingBox" ></ProviderSettingBox>
-  </el-drawer>
+  </el-dialog>
+  <!-- <el-drawer v-model="isShowSetProviderBox" title="I am the title" :with-header="false">
+    
+  </el-drawer> -->
   
 </template>
 <script lang="ts" setup>
@@ -146,6 +150,7 @@ const fetchStreamResponse = async () => {
 
 const isShowSetProviderBox = ref(false);
 const showSetProviderBox = () =>{
+  
   if(isShowSetProviderBox.value){
     isShowSetProviderBox.value = false;
   }else{
@@ -158,6 +163,7 @@ const showSetUrlBox = () =>{
   if(isShowSetUrlBox.value){
     isShowSetUrlBox.value = false;
   }else{
+    isShowSetUrlBox.value = true;
   }
 }
 
@@ -266,7 +272,7 @@ onMounted(() => {
 }
 
 .inputBox {
-  width: 1040px;
+  width: 800px;
   height: 60px;
   font-size: xx-large;
 }
