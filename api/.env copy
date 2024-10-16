@@ -1,4 +1,4 @@
-MYSQL_IP=chat2note
+MYSQL_IP=localhost
 MYSQL_PORT=3306
 MYSQL_BASE=chat2note
 MYSQL_USER=chat2note

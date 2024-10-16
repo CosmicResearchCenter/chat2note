@@ -3,7 +3,32 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
+
+
 from alembic import context
+
+from dotenv import load_dotenv
+import os
+
+
+# 加载 .env 文件
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+
+# 从环境变量中获取数据库连接信息
+MYSQL_IP = os.getenv("MYSQL_IP", "localhost")
+MYSQL_PORT = os.getenv("MYSQL_PORT", "3306")
+MYSQL_BASE = os.getenv("MYSQL_BASE", "chat2note")
+MYSQL_USER = os.getenv("MYSQL_USER", "chat2note")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "chat2note")
+
+# 构建 SQLAlchemy 的数据库连接 URL
+DATABASE_URL = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_IP}:{MYSQL_PORT}/{MYSQL_BASE}"
+
+# Alembic 配置
+config = context.config
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
+
+
 from models.llm_info import Base
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
