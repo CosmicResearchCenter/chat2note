@@ -3,7 +3,7 @@ from database.mysql_client import Base
 from sqlalchemy.sql import func
 
 class Api_Keys(Base):
-    __tablename__ = "api_keys"
+    __tablename__ = "apikeys"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     provider = Column(String(255))
