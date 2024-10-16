@@ -9,7 +9,6 @@ cachetools==5.5.0
 certifi==2024.8.30
 cffi==1.17.1
 charset-normalizer==3.3.2
-chat2note @ file:///Users/markyangkp/Desktop/Projects/chat2note
 click==8.1.7
 cryptography==38.0.4
 cssselect==1.2.0
