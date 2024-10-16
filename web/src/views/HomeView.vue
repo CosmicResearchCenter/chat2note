@@ -4,12 +4,17 @@
       <el-skeleton :rows="10" animated />
     </div>
     <div v-else class="paid">
+      <div class="menuBoxDefault">
+        <div class="setProviderButton">
+          <el-button  @click="showSetProviderBox">设置提供商</el-button>
+        </div>
+      </div>
       <div class="hidenMarkdownBox" v-if="!showMarkdown">
         <h1 style="font-size: 100px;">Chat2Note</h1>
         <div class="chatUrlBox">
           <el-select
             v-model="provider"
-            placeholder="Select"
+            placeholder="模型提供商"
             size="large"
             style="width: 120px"
           >
@@ -27,6 +32,19 @@
 
       <div class="markdownBox" v-else>
         <div class="menuBox">
+          <el-select
+            v-model="provider"
+            placeholder="Select"
+            size="large"
+            style="width: 120px"
+          >
+            <el-option
+              v-for="item in providers"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
           <div class="chatUrlBoxMini">
             <el-input v-model="url" style="width: 440px;height: 50px;" placeholder="Please input" />
             <el-button @click="fetchStreamResponse" style="width: 100px; height: 50px;">获取</el-button>
@@ -121,6 +139,24 @@ const fetchStreamResponse = async () => {
     console.error('Error fetching stream:', error);
   }
 };
+
+const isShowSetProviderBox = ref(false);
+const showSetProviderBox = () =>{
+  if(isShowSetProviderBox.value){
+    isShowSetProviderBox.value = false;
+  }else{
+    isShowSetProviderBox.value = true;
+  }
+}
+
+const isShowSetUrlBox = ref(false);
+const showSetUrlBox = () =>{
+  if(isShowSetUrlBox.value){
+    isShowSetUrlBox.value = false;
+  }else{
+  }
+}
+
 const getProviders = async () => {
   const get_url = 'http://127.0.0.1:9988/v1/api/chat2note/get_providers';
 
