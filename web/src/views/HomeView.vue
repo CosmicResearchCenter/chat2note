@@ -1,7 +1,7 @@
 <template>
   <div class="Main">
-    <div v-if="isLoading">
-      <el-skeleton :rows="50" animated />
+    <div v-if="isLoading" class="loadingBox">
+      <el-skeleton :rows="10" animated />
     </div>
     <div v-else class="paid" >
       <div class="chatUrlBox" v-if="!showMarkdown">
@@ -117,6 +117,13 @@ onMounted(() => {
   height: 100vh;
   /* width: 100vh; */
   /* 让父容器充满整个视窗高度 */
+}
+.loadingBox{
+  width: 60%; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .paid{
   padding-top: 100px;
