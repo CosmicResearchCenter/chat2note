@@ -101,7 +101,9 @@ const fetchStreamResponse = async () => {
   // 点击后显示加载中的提示
   isLoading.value = true;
   showMarkdown.value = true;
-
+  // 清空响应数据
+  responseText.value = '';
+  // 发起请求
   const post_url = 'http://127.0.0.1:9988/v1/api/chat2note/chat2note';
   const payload = {
     url: url.value,
