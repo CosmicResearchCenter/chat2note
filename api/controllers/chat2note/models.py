@@ -9,6 +9,10 @@ class ChatLogResponse(BaseModel):
     code:str
     message:str
     data:List[Any]
+class ProvidersRequest(BaseModel):
+    provider:str
+    api_key:str
+    config:Any
 
 class ProvidersResponse(BaseModel):
     code:str

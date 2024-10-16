@@ -2,7 +2,7 @@ from core.chat2note.chat2note import ChatToNote
 from core.chat2note.get_logs import ChatLoger
 from models.llm_info import Api_Keys
 from database.mysql_client import MysqlClient
-
+from datetime import datetime
 class Chat2NoteService:
     def __init__(self,provider:str) -> None:
         self.chatToNote = ChatToNote(provider)
@@ -47,6 +47,24 @@ class ProviderService(MysqlClient):
         for i in Info:
             providers.append(i.provider)
         return providers
+    def set_provider(self,provider:str,api_key,config)->bool:
+        item = self.db.query(Api_Keys).filter(Api_Keys.provider==provider).first()
+        if item:
+            item.api_key = api_key
+            item.config = config
+            timestamp = datetime.now()
+            item.updated_at = timestamp
+            self.db.commit()
+            self.db.refresh(item)
+            return True
+        else:
+            timestamp = datetime.now()
+            llm_info = Api_Keys(provider=provider,api_key=api_key,config=config, created_at=timestamp,updated_at=timestamp)
+            print(llm_info.id)
+            self.db.add(llm_info)
+            self.db.commit()
+            self.db.refresh(llm_info)
+        return True
 if __name__ == "__main__":
     # ch = Chat2NoteService("OPENAI")
     # ch.chat_to_note("https://chatgpt.com/share/670cefb4-0ae8-8009-b0a2-609e20541598",steaming=True)
