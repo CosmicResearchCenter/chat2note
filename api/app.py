@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from configs.llm_config import llm_Settings
+# from configs.llm_config import llm_Settings
 from fastapi import FastAPI, APIRouter
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn

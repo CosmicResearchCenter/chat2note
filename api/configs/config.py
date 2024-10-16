@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings
+
 class Settings(BaseSettings):
     MYSQL_IP: str
     MYSQL_PORT: str
@@ -7,5 +8,6 @@ class Settings(BaseSettings):
     MYSQL_PASSWORD: str
     class Config:
        env_file = ".env"
+       extra = 'allow'
  
 settings = Settings()
