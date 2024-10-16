@@ -7,7 +7,20 @@
       <div class="hidenMarkdownBox" v-if="!showMarkdown">
         <h1 style="font-size: 100px;">Chat2Note</h1>
         <div class="chatUrlBox">
-          <el-input v-model="url" class="inputBox" placeholder="Please input" />
+          <el-select
+            v-model="provider"
+            placeholder="Select"
+            size="large"
+            style="width: 120px"
+          >
+            <el-option
+              v-for="item in providers"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+          <el-input v-model="url" class="inputBox" placeholder="Please input URL" />
           <el-button class="inputButton" @click="fetchStreamResponse">获取</el-button>
         </div>
       </div>
@@ -31,14 +44,16 @@
 <script lang="ts" setup>
 import { ref, onMounted, nextTick } from 'vue';
 
+
 //用于设置是否显示markdown编辑器
 const showMarkdown = ref(false);
 
 // 控制显示“加载中”提示
 const isLoading = ref(false);
-
+const providers = ref([]);
 // const text = ref("123")
 const url = ref("")
+const provider = ref("")
 // 定义响应数据的状态
 const responseText = ref('');
 // 导出为 .md 文件的函数
@@ -64,6 +79,7 @@ const fetchStreamResponse = async () => {
   const post_url = 'http://127.0.0.1:9988/v1/api/chat2note/chat2note';
   const payload = {
     url: url.value,
+    provider: provider.value,
     steaming: true
   };
 
@@ -105,8 +121,31 @@ const fetchStreamResponse = async () => {
     console.error('Error fetching stream:', error);
   }
 };
+const getProviders = async () => {
+  const get_url = 'http://127.0.0.1:9988/v1/api/chat2note/get_providers';
 
+  try {
+    const response = await fetch(get_url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (response.ok) {
+      const data = await response.json();
+      providers.value = data.data;
+      console.log(providers.value);
+    } else {
+      console.error('Error:', response.status);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    
+  }
+};
 onMounted(() => {
+  getProviders();
   console.log("mounted\n123132")
 });
 </script>
