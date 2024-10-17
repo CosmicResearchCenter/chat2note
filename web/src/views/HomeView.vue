@@ -172,7 +172,7 @@ const showSetUrlBox = () =>{
 const getProviders = async () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   console.log(BASE_URL);
-  const get_url =  BASE_URL+'/v1/api/chat2note/get_providers';
+  const get_url =  'http://127.0.0.1:9988/v1/api/chat2note/get_providers';
 
   try {
     const response = await fetch(get_url, {
